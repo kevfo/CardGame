@@ -8,16 +8,22 @@
 
     <link rel = 'stylesheet' href = 'assets/style.css' />
     <script src = 'assets/logic.js' defer></script>
+
+    <!-- Card data -->
+    <script src = 'assets/cards.js'> </script>
   </head>
   <body>
-    <div class="game">
-      <div class="controls">
-        <button> Start </button>
-        <div class="stats">
-          <div class="moves"> 0 moves </div>
-          <div class="timer"> time: 0 sec </div>
-        </div>
+    <div id = 'selectionMenu'>
+      <h3 style = "text-align: center;"> Select a game difficulty: </h3>
+      <div class = "difficultyButtons">
+        <button onclick = "generateGame('easy')"> Easy </button>
+        <button onclick = "generateGame('medium')"> Medium </button>
+        <button onclick = "generateGame('hard')" disabled> Hard </button>
       </div>
+    </div>
+
+    <!-- Game itself: -->
+    <div class="game">
       <div class="board-container">
         <div class="board" data-dimension = '4'>
           <div class="card">

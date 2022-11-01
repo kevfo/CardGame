@@ -15,7 +15,7 @@ const state = {
   loop : null
 }
 
-// Picks according to the Fihser Yates algorithm:
+// Picks according to the Fisher Yates algorithm:
 function pickRandom(array, items) {
   const clonedArray = array;
   const randomPicks = [];
@@ -44,29 +44,71 @@ function shuffle(array) {
   return clonedArray;
 }
 
-// Makes the game:
-function generateGame() {
+// Picks the emojis depending on which button gets pressed:
+function pickContents(difficulty) {
+  switch(difficulty) {
+    case "easy":
+      return easyCards;
+    case "medium":
+      return mediumCards;
+    case "hard":
+      return hardCards;
+    default:
+      throw new Error("Pick a proper difficulty!")
+  }
+}
+
+// Makes the modal disappear and loads in the cards:
+function generateGame(difficulty) {
+  let selectionMenu = document.getElementById('selectionMenu') ; selectionMenu.style.display = 'none'
+  let game = document.querySelector('.game') ; game.style.display = 'block';
+  let things = pickContents(difficulty);
+  let usedItems = [], cards = [];
+
   const dimensions = selectors.board.getAttribute('data-dimension');
 
   if (dimensions % 2 !== 0) {
     throw new Error("'data-dimension' must be an even number!");
   }
 
-  const emojis = ['🥔', '🍒', '🥑', '🌽', '🥕', '🍇', '🍉', '🍌', '🥭', '🍍'];
-  const picks = pickRandom(emojis, (dimensions * dimensions) / 2);
+  // const emojis = ['🥔', '🍒', '🥑', '🌽', '🥕', '🍇', '🍉', '🍌', '🥭', '🍍'];
+
+  /*
+  let content = pickContents(difficulty)
+  */
+
+  const picks = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8], (dimensions * dimensions) / 2);
   const items = shuffle([...picks, ...picks]);
+  /*
   const cards = `
     <div class = 'board' style = 'grid-template-columns: repeat(${dimensions}, auto)'>
       ${items.map(item => `
         <div class = 'card'>
           <div class = 'card-front'> </div>
-          <div class = 'card-back'> ${item} </div>
+          <div class = 'card-back'> ${usedItems.include(things['descs'][item]) ? `<img src = ${things['images'][item]} />` : things['descs'][item]} </div>
         </div>
-      `).join('')}
+      `).join(''); usedItems.push(things['descs'][item])}
     </div>
-  `
+  `// ${usedItems.includes(things['descs'][item]) ? `<img src = ${things['images'][item]} />` : things['descs'][item]}
+  */
 
-  const parser = new DOMParser().parseFromString(cards, 'text/html')
+  for (let i = 0; i < items.length ; i++) {
+    cards.push(`
+      <div class = 'card' id = ${things['ids'][items[i]]}>
+        <div class = 'card-front'> </div>
+        <div class = 'card-back'> ${usedItems.includes(things['ids'][items[i]]) ? `<img src = "${things['images'][items[i]]}">` : things['descs'][items[i]]} </div>
+      </div>
+    `)
+    usedItems.push(things['ids'][items[i]]);
+  }
+
+  let board = `
+  <div class = 'board' style = 'grid-template-columns: repeat(${dimensions}, auto)'>
+    ${cards.join(' ')}
+  </div>
+  `
+  // console.log(usedItems) ; console.log(cards);
+  const parser = new DOMParser().parseFromString(board, 'text/html')
   selectors.board.replaceWith(parser.querySelector('.board'))
 }
 
@@ -90,10 +132,12 @@ function startGame() {
   state.loop = setInterval(() => {
     state.totalTime++;
 
-    selectors.moves.innerText = `${state.totalFlips} moves`;
-    selectors.timer.innerText = `Total: ${state.totalTime} seconds`
+    // selectors.moves.innerText = `${state.totalFlips} moves`;
+    // selectors.timer.innerText = `Total: ${state.totalTime} seconds`
   }, 1000)
 }
+
+// Functions to help flip cards:
 
 function flipBackCards() {
   document.querySelectorAll('.card:not(.matched)').forEach(card => {
@@ -118,9 +162,14 @@ function flipCard(card) {
   if (state.flipped === 2) {
     const flippedCards = document.querySelectorAll('.flipped:not(.matched)')
 
-    if (flippedCards[0].innerText === flippedCards[1].innerText) {
+    if (flippedCards[0].id === flippedCards[1].id) {
       flippedCards[0].classList.add('matched');
       flippedCards[1].classList.add('matched');
+    } else if (flippedCards[0].innerText !== '' || flippedCards[1].innerText !== '') {
+      if (flippedCards[0].innerText === flippedCards[1].innerText) {
+        flippedCards[0].classList.add('matched');
+        flippedCards[1].classList.add('matched');
+      }
     }
 
     setTimeout(() => {
@@ -134,8 +183,7 @@ function flipCard(card) {
       selectors.win.innerHTML = `
         <span class = "win-text">
           You won! <br />
-          with <span class = "highlight"> ${state.totalFlips} </span> moves <br />
-          under <span class = 'highlight'> ${state.totalTime} </span> seconds!
+          with <span class = "highlight"> ${state.totalFlips} </span> moves!
         </span>
       `
 
@@ -144,5 +192,7 @@ function flipCard(card) {
   }
 }
 
-generateGame();
+// Function to start game:
+
+// generateGame();
 attachEventListeners();

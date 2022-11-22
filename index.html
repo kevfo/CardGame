@@ -7,6 +7,7 @@
     <title> Memory Game </title>
 
     <link rel = 'stylesheet' href = 'assets/style.css' />
+    <script src = 'assets/cardLogic.js' defer></script>
     <script src = 'assets/logic.js' defer></script>
 
     <!-- Card data -->
@@ -17,13 +18,14 @@
       <h3 style = "text-align: center;"> Select a game difficulty: </h3>
       <div class = "difficultyButtons">
         <button onclick = "generateGame('easy')"> Easy </button>
-        <button onclick = "generateGame('medium')" disabled> Medium </button>
-        <button onclick = "generateGame('hard')" disabled> Hard </button>
+        <button onclick = "generateGame('medium')"> Medium </button>
+        <button onclick = "generateGame('hard')"> Hard </button>
       </div>
     </div>
 
     <!-- Game itself: -->
     <div class="game">
+      <h2 class = 'brief'> Match all the cards! </h2>
       <div class="board-container">
         <div class="board" data-dimension = '4'>
           <div class="card">
@@ -31,7 +33,7 @@
             <div class="card-back"> Card back </div>
           </div>
         </div>
-        <div class="win"> You won! </div>
+        <div class="win"> You won with </div>
       </div>
     </div>
   </body>

@@ -92,6 +92,7 @@ function generateGame(difficulty) {
   `// ${usedItems.includes(things['descs'][item]) ? `<img src = ${things['images'][item]} />` : things['descs'][item]}
   */
 
+  /*
   for (let i = 0; i < items.length ; i++) {
     cards.push(`
       <div class = 'card' id = ${things['ids'][items[i]]}>
@@ -101,6 +102,9 @@ function generateGame(difficulty) {
     `)
     usedItems.push(things['ids'][items[i]]);
   }
+  */
+  
+  cards = generateCardContent(difficulty, items);
 
   let board = `
   <div class = 'board' style = 'grid-template-columns: repeat(${dimensions}, auto)'>
@@ -147,6 +151,14 @@ function flipBackCards() {
   state.flipped = 0;
 }
 
+// Function to help re-start the game:
+function restartGame() {
+  let selectionMenu = document.querySelector('#selectionMenu');
+  let gameComplete = document.querySelector('.win')
+  selectionMenu.style.display = 'block';
+  gameComplete.style.display = 'none';
+}
+
 function flipCard(card) {
   state.flipped++;
   state.totalFlips++;
@@ -182,8 +194,10 @@ function flipCard(card) {
       selectors.boardContainer.classList.add('flipped');
       selectors.win.innerHTML = `
         <span class = "win-text">
-          You won! <br />
-          with <span class = "highlight"> ${state.totalFlips} </span> moves!
+          Congratulations! <br /> <br />
+          You won <br />
+          with <span class = "highlight"> ${state.totalFlips} </span> moves! <br /> <br />
+          <button onclick = "restartGame()"> Play again! </button>
         </span>
       `
 

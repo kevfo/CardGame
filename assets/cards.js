@@ -9,7 +9,7 @@ var easyCards = {
 
 var mediumCards = {
     "ids": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-    "descs" : ["Feeds on nectar", "Used for cooking", "Makes rat poison", "Climb trees and hunt",
+    "descs" : ["Feeds on nectar", "Used for desserts", "Makes rat poison", "Climbs and hunts",
     "Sea almond", "Crepe ginger", "Pong pong", "Malayan banyan", "Fish poison tree"],
     "images" : ["assets/images/medium/a.jpg", "assets/images/medium/b.jpg", "assets/images/medium/c.jpg",
     "assets/images/medium/d.jpg", "assets/images/medium/e.jpg", "assets/images/medium/f.jpg",

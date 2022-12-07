@@ -13,4 +13,8 @@ Here are a collection of features to add based on user recommendations:
     - As of now, the code hides and re-displays the buttons.  Perhaps something can be done to "un-click" the button via JS.
 1.  The easy difficulty has been implemented.
 1.  The explanation still needs work.
-    - Maybe under the buttons?
+    - I've done up explanations already, but they still look a little ugly.  Perhaps use something else instead?
+
+1. What the heck do I put for hard difficulty?
+1. Make sure that the pictures and the words match!
+1. Should I add a start menu?

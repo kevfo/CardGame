@@ -18,9 +18,9 @@ var mediumCards = {
 
 var hardCards = {
     "ids": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-    "descs" : ["Plantain squirrel", "Smooth coated otter", "Water monitor lizard", "Bamboo orchid",
+    "descs" : ["Plantain squirrel", "Coated otter", "Monitor lizard", "Bamboo orchid",
     "Sea almond", "Pandan", "Pong pong", "Malayan banyan", "Fish poison tree"],
-    "images" : ["assets/images/hard/a.jpg", "assets/images/hard/b.jpg", "assets/images/hard/c.jpg",
+    "images" : ["assets/images/hard/a.jpg", "assets/images/b.jpg", "assets/images/hard/c.jpg",
     "assets/images/hard/d.jpg", "assets/images/hard/e.jpg", "assets/images/hard/f.jpg",
     "assets/images/hard/g.jpg", "assets/images/hard/h.jpg", "assets/images/hard/i.jpg", "assets/images/hard/j.jpg"],
     "names" : []

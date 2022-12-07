@@ -60,50 +60,23 @@ function pickContents(difficulty) {
 
 // Makes the modal disappear and loads in the cards:
 function generateGame(difficulty) {
-  let selectionMenu = document.getElementById('selectionMenu') ; selectionMenu.style.display = 'none'
+  let selectionMenu = document.querySelector('.selectionMenu') ; selectionMenu.style.display = 'none';
   let game = document.querySelector('.game') ; game.style.display = 'block';
   let things = pickContents(difficulty);
   let usedItems = [], cards = [];
 
-  const dimensions = selectors.board.getAttribute('data-dimension');
+  // Make the selections:
+  let queryBoard = document.querySelector('.board');
+
+  const dimensions = queryBoard.getAttribute('data-dimension');
 
   if (dimensions % 2 !== 0) {
     throw new Error("'data-dimension' must be an even number!");
   }
 
-  // const emojis = ['🥔', '🍒', '🥑', '🌽', '🥕', '🍇', '🍉', '🍌', '🥭', '🍍'];
-
-  /*
-  let content = pickContents(difficulty)
-  */
-
   const picks = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8], (dimensions * dimensions) / 2);
   const items = shuffle([...picks, ...picks]);
-  /*
-  const cards = `
-    <div class = 'board' style = 'grid-template-columns: repeat(${dimensions}, auto)'>
-      ${items.map(item => `
-        <div class = 'card'>
-          <div class = 'card-front'> </div>
-          <div class = 'card-back'> ${usedItems.include(things['descs'][item]) ? `<img src = ${things['images'][item]} />` : things['descs'][item]} </div>
-        </div>
-      `).join(''); usedItems.push(things['descs'][item])}
-    </div>
-  `// ${usedItems.includes(things['descs'][item]) ? `<img src = ${things['images'][item]} />` : things['descs'][item]}
-  */
 
-  /*
-  for (let i = 0; i < items.length ; i++) {
-    cards.push(`
-      <div class = 'card' id = ${things['ids'][items[i]]}>
-        <div class = 'card-front'> </div>
-        <div class = 'card-back'> ${usedItems.includes(things['ids'][items[i]]) ? `<img src = "${things['images'][items[i]]}">` : things['descs'][items[i]]} </div>
-      </div>
-    `)
-    usedItems.push(things['ids'][items[i]]);
-  }
-  */
-  
   cards = generateCardContent(difficulty, items);
 
   let board = `
@@ -113,7 +86,7 @@ function generateGame(difficulty) {
   `
   // console.log(usedItems) ; console.log(cards);
   const parser = new DOMParser().parseFromString(board, 'text/html')
-  selectors.board.replaceWith(parser.querySelector('.board'))
+  queryBoard.replaceWith(parser.querySelector('.board'))
 }
 
 function attachEventListeners() {
@@ -155,8 +128,11 @@ function flipBackCards() {
 function restartGame() {
   let selectionMenu = document.querySelector('#selectionMenu');
   let gameComplete = document.querySelector('.win')
-  selectionMenu.style.display = 'block';
-  gameComplete.style.display = 'none';
+  // selectionMenu.style.display = 'block';
+  // gameComplete.style.display = 'none';
+
+  gameComplete.classList = 'selectionMenu';
+
 }
 
 function flipCard(card) {
@@ -192,6 +168,9 @@ function flipCard(card) {
   if (!document.querySelectorAll('.card:not(.flipped)').length) {
     setTimeout(() => {
       selectors.boardContainer.classList.add('flipped');
+
+      // If this is the case:
+      selectors.win.style.display = 'block';
       selectors.win.innerHTML = `
         <span class = "win-text">
           Congratulations! <br /> <br />

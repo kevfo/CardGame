@@ -1,4 +1,4 @@
-const selectors = {
+/* const selectors = {
   boardContainer : document.querySelector('.board-container'),
   board : document.querySelector('.board'),
   moves : document.querySelector('.moves'),
@@ -6,6 +6,7 @@ const selectors = {
   start : document.querySelector('button'),
   win : document.querySelector('.win')
 }
+*/
 
 const state = {
   hasStarted : false,
@@ -63,6 +64,7 @@ function generateGame(difficulty) {
   let selectionMenu = document.querySelector('.selectionMenu') ; selectionMenu.style.display = 'none';
   let game = document.querySelector('.game') ; game.style.display = 'block';
   let things = pickContents(difficulty);
+  let selectors = remakeSelectors();
   let usedItems = [], cards = [];
 
   // Make the selections:
@@ -104,6 +106,7 @@ function attachEventListeners() {
 
 function startGame() {
   state.hasStarted = true;
+  let selectors = remakeSelectors();
   selectors.start.classList.add('disabled');
 
   state.loop = setInterval(() => {
@@ -124,20 +127,10 @@ function flipBackCards() {
   state.flipped = 0;
 }
 
-// Function to help re-start the game:
-function restartGame() {
-  let selectionMenu = document.querySelector('#selectionMenu');
-  let gameComplete = document.querySelector('.win')
-  // selectionMenu.style.display = 'block';
-  // gameComplete.style.display = 'none';
-
-  gameComplete.classList = 'selectionMenu';
-
-}
-
 function flipCard(card) {
   state.flipped++;
   state.totalFlips++;
+  let selectors = remakeSelectors();
 
   if (!state.hasStarted) {
     startGame();

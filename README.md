@@ -7,7 +7,9 @@ Here are a collection of features to add based on user recommendations:
     - e.g., If the user cannot read, it won't be that easy for them.
 1.  Have an explanation *somewhere* in the game on the game's difficulties.
 
+
 # Current progress...
+
 
 1.  A restart menu has been added.  However, the buttons on the new menu cannot be clicked.
     - As of now, the code hides and re-displays the buttons.  Perhaps something can be done to "un-click" the button via JS.
@@ -18,3 +20,8 @@ Here are a collection of features to add based on user recommendations:
 1. What the heck do I put for hard difficulty?
 1. Make sure that the pictures and the words match!
 1. Should I add a start menu?
+
+## More thigns:
+
+1.  Bigger images
+1.  

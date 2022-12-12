@@ -15,8 +15,7 @@ function restartGame() {
       </div>
       <div class = "butttonGroupings" style="display: flex;flex-direction: column;justify-content: center; padding-left: 2em;">
         <button onclick = "generateGame('hard')"> Hard </button>
-        <p style = "text-align: center;"> Mostly words -
-          know your stuff well! </p>
+        <p style = "text-align: center;"> More facts about biodiversity! </p>
       </div>
     </div>
   </div>
@@ -35,7 +34,9 @@ function restartGame() {
     </div>
   </div>
   `
-  state.totalFlips = 0;
+
+  state.totalFlips = 0; state.hasStarted = false;
+  selectors = remakeSelectors();
 }
 
 // Moves to selection menu:
@@ -47,17 +48,28 @@ function toSelectionMenu() {
   <div class = "difficultyButtons">
     <div class = "butttonGroupings" style="display: flex;flex-direction: column;justify-content: center; ">
       <button onclick = "generateGame('easy')"> Easy </button>
-      <p style = "text-align: center;"> No words, only images </p>
+      <p style = "text-align: center;"> No words, only images! </p>
     </div>
     <div class = "butttonGroupings" style="display: flex;flex-direction: column;justify-content: center; padding-left: 2em;">
       <button onclick = "generateGame('medium')"> Medium </button>
-      <p style = "text-align: center;"> Some descriptions and images </p>
+      <p style = "text-align: center;"> Some descriptions and images! </p>
     </div>
     <div class = "butttonGroupings" style="display: flex;flex-direction: column;justify-content: center; padding-left: 2em;">
       <button onclick = "generateGame('hard')"> Hard </button>
-      <p style = "text-align: center;"> Mostly words -
-        know your stuff well! </p>
+      <p style = "text-align: center;"> More facts about biodiversity! </p>
     </div>
   </div>
   `
+}
+
+// Meant to be used within restartGame():
+function remakeSelectors() {
+  return {
+    boardContainer : document.querySelector('.board-container'),
+    board : document.querySelector('.board'),
+    moves : document.querySelector('.moves'),
+    timer : document.querySelector('.timer'),
+    start : document.querySelector('button'),
+    win : document.querySelector('.win')
+  };
 }

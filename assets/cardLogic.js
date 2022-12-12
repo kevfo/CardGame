@@ -35,7 +35,7 @@ function generateCardContent(difficulty, shuffledArray) {
         cardsToRender.push(`
           <div class = 'card' id = ${cardData.ids[shuffledArray[i]]}>
             <div class = 'card-front'> </div>
-            <div class = 'card-back'> ${usedContent.includes(cardData['ids'][shuffledArray[i]]) ? `<img src = "${cardData['images'][shuffledArray[i]]}">` : cardData['descs'][shuffledArray[i]]} </div>
+            <div class = 'card-back'> ${usedContent.includes(cardData['ids'][shuffledArray[i]]) ? (cardData['images'][shuffledArray[i]].split('/')[0] == 'assets' ? `<img src = "${cardData['images'][shuffledArray[i]]}">` : cardData['images'][shuffledArray[i]]) : cardData['descs'][shuffledArray[i]]} </div>
           </div>
         `)
         usedContent.push(cardData.ids[shuffledArray[i]]);
